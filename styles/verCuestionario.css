@@ -1,0 +1,21 @@
+body{
+    padding: 30px;
+    background-color: rgb(179, 227, 187);
+}
+
+#tablaCuestionarios {
+    border: 1px solid black;
+    width: 40%;
+    background-color: white;
+    border-collapse: collapse; 
+}
+
+#tablaCuestionarios th, #tablaCuestionarios td {
+    border: 1px solid black;
+    padding: 8px; 
+    text-align: center;
+}
+
+#tablaCuestionarios th {
+    background-color: lightgray; 
+}

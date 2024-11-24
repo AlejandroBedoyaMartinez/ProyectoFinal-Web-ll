@@ -1,0 +1,20 @@
+body {
+    font-family: Arial, sans-serif;
+}
+.controles {
+    margin-bottom: 20px;
+}
+.pregunta {
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+}
+.respuesta {
+    margin-left: 20px;
+}
+button {
+    margin: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
