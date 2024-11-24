@@ -16,7 +16,6 @@ $result = $NewConn->ExecuteQuery($query);
 if($result){
     $RowCount = $NewConn->GetCountAffectedRows();
     if($RowCount > 0){
-        echo "Query ejecutado exitosamente <br/>";
         header("Location: PaginaPrincipal.php");
         $_SESSION['user'] = $user;
     }else{
