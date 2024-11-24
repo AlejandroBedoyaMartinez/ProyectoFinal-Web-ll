@@ -2,8 +2,15 @@
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $idMateria = $_POST['idMateria'];
 
-    $conexion = new mysqli("webll.mysql.database.azure.com", "cuestionarios", "Jano123.", "soporte");
-    if ($conexion->connect_error) {
+    $servidor = "webll.mysql.database.azure.com";
+    $usuario = "cuestionarios";
+    $password = "Jano123.";
+    $baseDatos = "soporte";
+    
+    $conexion = mysqli_init();
+    mysqli_ssl_set($conexion, null, null, __DIR__ . "/certs/ca-cert.pem", null, null); // Ruta al certificado
+    mysqli_real_connect($conexion, $servidor, $usuario, $password, $baseDatos, 3306, null, MYSQLI_CLIENT_SSL);
+        if ($conexion->connect_error) {
         die("Error de conexión: " . $conexion->connect_error);
     }
 
