@@ -1,5 +1,5 @@
 <?php
-$conexion = new mysqli("localhost", "root", "root", "soporte");
+$conexion = new mysqli("webll.mysql.database.azure.com", "cuestionarios", "Jano123.", "soporte");
 if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
 }
