@@ -19,6 +19,24 @@ if (!isset($_GET['idCuestionario']) || !is_numeric($_GET['idCuestionario'])) {
 }
 
 $idCuestionario = intval($_GET['idCuestionario']);
+$idUsuario = $_SESSION['idUsuario']; 
+
+$queryVerificar = "SELECT 1 FROM materia m 
+                   WHERE m.idCuestionario = ? AND m.idUsuario = ?";
+$stmtVerificar = $conexion->prepare($queryVerificar);
+
+if (!$stmtVerificar) {
+    die("Error al preparar la consulta de verificación: " . $conexion->error);
+}
+
+$stmtVerificar->bind_param("ii", $idCuestionario, $idUsuario);
+$stmtVerificar->execute();
+$stmtVerificar->store_result();
+
+if ($stmtVerificar->num_rows === 0) {
+    die("Error: No tienes permisos para ver este cuestionario.");
+}
+
 $query = "SELECT * FROM cuestionarios WHERE idCuestionario = ?";
 $stmt = $conexion->prepare($query);
 if (!$stmt) {

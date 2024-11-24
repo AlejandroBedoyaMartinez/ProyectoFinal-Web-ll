@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (!isset($_SESSION['idUsuario'])) {
+    die("No se ha iniciado sesión.");
+}
 
 $servidor = "webll.mysql.database.azure.com";
 $usuario = "cuestionarios";
@@ -13,8 +16,13 @@ if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
 }
 
-$queryMaterias = "SELECT idMateria, NombreMateria FROM materia";
-$resultadoMaterias = $conexion->query($queryMaterias);
+$idUsuario = $_SESSION['idUsuario'];
+
+$queryMaterias = "SELECT idMateria, NombreMateria FROM materia WHERE idUsuario = ?";
+$stmt = $conexion->prepare($queryMaterias);
+$stmt->bind_param("i", $idUsuario); 
+$stmt->execute();
+$resultadoMaterias = $stmt->get_result();
 ?>
 <!DOCTYPE html>
 <html lang="es">

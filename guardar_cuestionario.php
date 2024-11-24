@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+// Verificamos que el usuario esté autenticado
+if (!isset($_SESSION['idUsuario'])) {
+    die("No se ha iniciado sesión.");
+}
+
 $servidor = "webll.mysql.database.azure.com";
 $usuario = "cuestionarios";
 $password = "Jano123.";
@@ -13,6 +18,8 @@ if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
 }
 
+$idUsuario = $_SESSION['idUsuario'];
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $idMateria = $_POST['idMateria'];
     $nombreCuestionario = $_POST['nombreCuestionario'];
@@ -22,15 +29,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                       VALUES (?, ?)";
 
     if ($stmt = $conexion->prepare($queryInsertar)) {
-        $stmt->bind_param("ss", $nombreCuestionario, $cuestionarioTexto);
+        $stmt->bind_param("ss", $nombreCuestionario, $cuestionarioTexto); 
         if ($stmt->execute()) {
-            $idCuestionario = $stmt->insert_id;
+            $idCuestionario = $stmt->insert_id; 
 
             $queryMateria = "UPDATE materia SET idCuestionario = ? WHERE idMateria = ?";
             if ($stmtMateria = $conexion->prepare($queryMateria)) {
                 $stmtMateria->bind_param("ii", $idCuestionario, $idMateria);
                 if ($stmtMateria->execute()) {
-                    header("Location: PaginaPrincipal.php");
+                    header("Location: PaginaPrincipal.php"); 
                 } else {
                     echo "Error al asignar el cuestionario a la materia.";
                 }

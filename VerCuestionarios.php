@@ -23,21 +23,19 @@ $queryCuestionarios = "
     SELECT cuestionarios.idCuestionario, cuestionarios.NombreCuestionario
     FROM cuestionarios
     INNER JOIN materia ON materia.idCuestionario = cuestionarios.idCuestionario
-    WHERE materia.idMateria = ?";
-
+    WHERE materia.idMateria = ? AND materia.idUsuario = ?";
 $stmt = $conexion->prepare($queryCuestionarios);
+$stmt->bind_param("ii", $idMateria, $_SESSION['idUsuario']); // Usar $_SESSION['idUsuario'] directamente aquí
+
 if (!$stmt) {
     die("Error al preparar la consulta: " . $conexion->error);
 }
 
-$stmt->bind_param("i", $idMateria);
 $stmt->execute();
-
 $resultadoCuestionarios = $stmt->get_result();
-
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

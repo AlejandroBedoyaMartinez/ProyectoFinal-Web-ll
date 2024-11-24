@@ -13,20 +13,24 @@ if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
 }
 
-if (isset($_GET['idCuestionario'])) {
+if (isset($_GET['idCuestionario']) && isset($_SESSION['idUsuario'])) {
     $idCuestionario = $_GET['idCuestionario'];
+    $idUsuario = $_SESSION['idUsuario'];  // ID del usuario de la sesión
 
-    $queryCuestionario = "SELECT * FROM cuestionarios WHERE idCuestionario = ?";
+    // Consulta para obtener el cuestionario asociado a la materia del usuario
+    $queryCuestionario = "SELECT c.* FROM cuestionarios c 
+                          JOIN materia m ON c.idCuestionario = m.idCuestionario
+                          WHERE c.idCuestionario = ? AND m.idUsuario = ?";
     
     if ($stmt = $conexion->prepare($queryCuestionario)) {
-        $stmt->bind_param("i", $idCuestionario);
+        $stmt->bind_param("ii", $idCuestionario, $idUsuario); // Aseguramos que el cuestionario sea del usuario autenticado
         $stmt->execute();
         $resultado = $stmt->get_result();
 
         if ($resultado->num_rows > 0) {
             $cuestionario = $resultado->fetch_assoc();
         } else {
-            echo "No se encontró el cuestionario.";
+            echo "No se encontró el cuestionario o no tienes permisos para editarlo.";
             exit;
         }
         $stmt->close();
@@ -35,11 +39,11 @@ if (isset($_GET['idCuestionario'])) {
         exit;
     }
 } else {
-    echo "No se proporcionó el ID del cuestionario.";
+    echo "No se proporcionó el ID del cuestionario o no estás autenticado.";
     exit;
 }
-
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>

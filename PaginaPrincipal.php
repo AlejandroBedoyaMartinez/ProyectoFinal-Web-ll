@@ -1,22 +1,49 @@
 <?php
 session_start();
 
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
+    exit();
+}
+
 $servidor = "webll.mysql.database.azure.com";
 $usuario = "cuestionarios";
 $password = "Jano123.";
 $baseDatos = "soporte";
 
 $conexion = mysqli_init();
-mysqli_ssl_set($conexion, null, null, __DIR__ . "/certs/ca-cert.pem", null, null); // Ruta al certificado
+mysqli_ssl_set($conexion, null, null, __DIR__ . "/certs/ca-cert.pem", null, null); // Ajusta la ruta si es necesario
 mysqli_real_connect($conexion, $servidor, $usuario, $password, $baseDatos, 3306, null, MYSQLI_CLIENT_SSL);
-if ($conexion->connect_error) {
-    die("Error de conexión: " . $conexion->connect_error);
+
+if (mysqli_connect_errno()) {
+    die("Error de conexión: " . mysqli_connect_error());
 }
 
-$queryMaterias = "SELECT idMateria, NombreMateria FROM materia";
-$resultadoMaterias = $conexion->query($queryMaterias);
+$queryUsuario = "SELECT idUsuario FROM usuarios WHERE user = ?";
+$stmtUsuario = $conexion->prepare($queryUsuario);
+$stmtUsuario->bind_param("s", $_SESSION['user']); // Pasar el nombre de usuario almacenado en la sesión
+$stmtUsuario->execute();
+$resultUsuario = $stmtUsuario->get_result();
 
+if ($resultUsuario && $resultUsuario->num_rows > 0) {
+    $row = $resultUsuario->fetch_assoc();
+    $idUsuario = $row['idUsuario']; // ID del usuario logueado
+} else {
+    die("No se encontró el usuario en la base de datos.");
+}
+
+$queryMaterias = "SELECT idMateria, NombreMateria FROM Materia WHERE idUsuario = ?";
+$stmtMaterias = $conexion->prepare($queryMaterias);
+$stmtMaterias->bind_param("i", $idUsuario); // 'i' indica que el parámetro es un entero
+$stmtMaterias->execute();
+$resultadoMaterias = $stmtMaterias->get_result();
+
+
+$stmtUsuario->close();
+$stmtMaterias->close();
+$conexion->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
