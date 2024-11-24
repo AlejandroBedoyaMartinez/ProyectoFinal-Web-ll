@@ -18,10 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $idUsuario = $_SESSION['idUsuario'];
 
-    // Verifica los valores de entrada
-    echo "idMateria: $idMateria, idUsuario: $idUsuario<br>";
-
-    // Verifica si existen filas antes de eliminar
     $queryVerificar = "SELECT * FROM materia WHERE idMateria = ? AND idUsuario = ?";
     $stmtVerificar = $conexion->prepare($queryVerificar);
     $stmtVerificar->bind_param("ii", $idMateria, $idUsuario);
@@ -33,7 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Procede a eliminar si se encontró la fila
     $query = "DELETE FROM materia WHERE idMateria = ? AND idUsuario = ?";
     $stmt = $conexion->prepare($query);
     $stmt->bind_param("ii", $idMateria, $idUsuario); 
