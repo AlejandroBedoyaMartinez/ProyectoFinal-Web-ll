@@ -1,21 +1,82 @@
 body{
     padding: 30px;
-    background-color: rgb(179, 227, 187);
+    background-image: url("fondoCuestionario.jpg");
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    font-family: 'Arial', sans-serif; 
+    text-align: center;
+}
+
+.regreso{
+    background-color: #2075d0; 
+    padding: 10px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: #ddd;
+    text-decoration: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.regreso:hover {
+    background-color: #0056b3; 
+}
+
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #fad796; 
+    color: black;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #dabc61;
+    transform: scale(1.05); 
+}
+
+button:focus {
+    outline: none;
 }
 
 #tablaCuestionarios {
-    border: 1px solid black;
-    width: 40%;
-    background-color: white;
+    border: 1px solid #ddd; 
+    width: 60%; 
+    margin: 20px auto; 
     border-collapse: collapse; 
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
 #tablaCuestionarios th, #tablaCuestionarios td {
-    border: 1px solid black;
-    padding: 8px; 
+    border: 1px solid #ddd; 
+    padding: 12px; 
     text-align: center;
 }
 
 #tablaCuestionarios th {
-    background-color: lightgray; 
+    background-color: #ffe4c4b5;
+    color: #333; 
+    font-weight: bold;
+}
+
+#tablaCuestionarios tr:nth-child(even) {
+    background-color: #f9f9f9; 
+}
+
+#tablaCuestionarios tr:hover {
+    background-color: #eaeaea; 
+}
+
+h1{
+    background: #ffe4c4b5;
 }

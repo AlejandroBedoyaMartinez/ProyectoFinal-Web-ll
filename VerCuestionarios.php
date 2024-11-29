@@ -41,13 +41,15 @@ $resultadoCuestionarios = $stmt->get_result();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cuestionarios</title>
     <link rel="stylesheet" href="styles/verCuestionario.css">
+    <script>
+        function regresar() {
+            window.history.back(); // Regresa a la página anterior
+        }
+    </script>
 </head>
 <body>
+<a href="PaginaPrincipal.php" class="regreso">Inicio</a>
     <h1>Cuestionarios</h1>
-    <form action="CrearCuestionario.php" method="GET">
-        <button type="submit">Crear Nuevo Cuestionario</button>
-        <br><br>
-    </form>
     <table id="tablaCuestionarios">
         <thead>
             <tr>

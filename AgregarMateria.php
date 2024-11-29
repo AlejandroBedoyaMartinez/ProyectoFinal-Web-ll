@@ -58,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="styles/AgregarEditarMateria.css">
 </head>
 <body>
+<a href="PaginaPrincipal.php" class="regreso">Inicio</a>
     <h1>Agregar Nueva Materia</h1>
     <form action="AgregarMateria.php" method="POST">
         <label for="nombreMateria">Nombre de la Materia:</label>

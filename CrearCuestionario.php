@@ -33,6 +33,7 @@ $resultadoMaterias = $stmt->get_result();
     <link rel="stylesheet" href="styles/crearCuestionario.css">
 </head>
 <body>
+<a href="PaginaPrincipal.php" class="regreso">Inicio</a>
     <h1>Crear Cuestionario</h1>
     
     <div class="controles">

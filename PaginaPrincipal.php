@@ -54,6 +54,7 @@ $conexion->close();
 </head>
 <body>
     <div id="principal">
+    <a href="index.html" class="regreso">Cerrar Sesion</a>
         <h1>Crear Cuestionario</h1>
         <form action="CrearCuestionario.php" method="GET">
             <button type="submit">Crear Nuevo Cuestionario</button>

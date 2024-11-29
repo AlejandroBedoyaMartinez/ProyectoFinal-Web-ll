@@ -55,6 +55,7 @@ if (isset($_GET['idCuestionario']) && isset($_SESSION['idUsuario'])) {
 <body>
     <h1>Editar Cuestionario</h1>
     <div id="Principal">
+    <a href="PaginaPrincipal.php" class="regreso">Inicio</a>
         <form action="ActualizarCuestionario.php" method="POST">
             <input type="hidden" name="idCuestionario" value="<?php echo $cuestionario['idCuestionario']; ?>">
             <label for="nombreCuestionario">Nombre del Cuestionario:</label>

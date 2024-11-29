@@ -64,6 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="styles/AgregarEditarMateria.css">
 </head>
 <body>
+<a href="PaginaPrincipal.php" class="regreso">Inicio</a>
     <h1>Editar Materia</h1>
     <form action="" method="POST">
         <input type="hidden" name="idMateria" value="<?php echo isset($idMateria) ? $idMateria : ''; ?>">

@@ -60,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="styles/login.css">
 </head>
 <body>
+    <a href="index.html" class="regreso">←</a>
     <form method="POST" action="crear_usuario.php">
         <h1>Crear Nuevo Usuario</h1>
         <div>
